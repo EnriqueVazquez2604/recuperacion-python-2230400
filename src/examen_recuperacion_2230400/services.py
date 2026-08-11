@@ -1,8 +1,17 @@
 def registrar_unidad(unidades, unidad):
+    # Validar duplicados
     if any(u.numero == unidad.numero for u in unidades):
         raise ValueError("Número de unidad duplicado.")
+
+    # Validar capacidad y pasajeros
+    if unidad.capacidad <= 0:
+        raise ValueError("La capacidad debe ser mayor que cero.")
+    if unidad.pasajeros < 0:
+        raise ValueError("Los pasajeros no pueden ser negativos.")
     if unidad.pasajeros > unidad.capacidad:
         raise ValueError("Pasajeros no pueden exceder la capacidad.")
+
+    # Si todo está correcto, agregar la unidad
     unidades.append(unidad)
 
 
@@ -51,3 +60,4 @@ def resumen_general(unidades):
     total = len(unidades)
     promedio_ocupacion = sum(u.pasajeros for u in unidades) / total if total > 0 else 0
     return {"total_unidades": total, "promedio_ocupacion": promedio_ocupacion}
+

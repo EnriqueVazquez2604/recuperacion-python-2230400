@@ -64,3 +64,25 @@ def test_resumen_general():
     ]
     resumen = resumen_general(unidades)
     assert resumen["total_unidades"] == 2
+
+import pytest
+from examen_recuperacion_2230400.models import Unidad
+from examen_recuperacion_2230400.services import registrar_unidad
+
+def test_registrar_unidad_capacidad_invalida():
+    unidades = []
+    u = Unidad(1, "Carlos", 0, 0, "Ruta Norte")
+    with pytest.raises(ValueError, match="capacidad"):
+        registrar_unidad(unidades, u)
+
+def test_registrar_unidad_pasajeros_negativos():
+    unidades = []
+    u = Unidad(2, "Ana", 20, -5, "Ruta Sur")
+    with pytest.raises(ValueError, match="negativos"):
+        registrar_unidad(unidades, u)
+
+def test_registrar_unidad_pasajeros_exceden_capacidad():
+    unidades = []
+    u = Unidad(3, "Luis", 10, 15, "Ruta Centro")
+    with pytest.raises(ValueError, match="exceder"):
+        registrar_unidad(unidades, u)
