@@ -7,4 +7,7 @@ class Unidad:
         self.ruta = ruta
 
     def __repr__(self):
-        return f"Unidad({self.numero}, {self.conductor}, {self.capacidad}, {self.pasajeros}, {self.ruta})"
+        return (
+            f"Unidad({self.numero}, {self.conductor}, {self.capacidad}, "
+            f"{self.pasajeros}, {self.ruta})"
+        )
